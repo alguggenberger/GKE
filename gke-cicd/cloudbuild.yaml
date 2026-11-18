@@ -1,18 +1,19 @@
+
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/<your-project-id>/gke-repo/quickstart-image', './gke-cicd/app1']
+  args: ['build', '-t', 'europe-north1-docker.pkg.dev/cicd-pipeline-515114/gke-repo/quickstart-image', './gke-cicd/app1']
   id: 'Build Docker Image 1'
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/<your-project-id>/gke-repo/quickstart-image']
+  args: ['push', 'europe-north1-docker.pkg.dev/cicd-pipeline-515114/gke-repo/quickstart-image']
   id: 'Push Docker Image 1'
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/<your-project-id>/gke-repo/flask-image', './gke-cicd/app2']
+  args: ['build', '-t', 'europe-north1-docker.pkg.dev/cicd-pipeline-515114/gke-repo/flask-image', './gke-cicd/app2']
   id: 'Build Docker Image 2'
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/<your-project-id>/gke-repo/flask-image']
+  args: ['push', 'europe-north1-docker.pkg.dev/cicd-pipeline-515114/gke-repo/flask-image']
   id: 'Push Docker Image 2'
 
 - name: 'google/cloud-sdk:latest'
@@ -21,11 +22,11 @@ steps:
     - -xe
     - -c
     - |
-      gcloud deploy apply --file gke-cicd/deploy/pipeline.yaml --region=us-central1
-      gcloud deploy apply --file gke-cicd/deploy/dev.yaml --region=us-central1
-      gcloud deploy apply --file gke-cicd/deploy/prod.yaml --region=us-central1
+      gcloud deploy apply --file gke-cicd/deploy/pipeline.yaml --region=europe-north1
+      gcloud deploy apply --file gke-cicd/deploy/dev.yaml --region=europe-north1
+      gcloud deploy apply --file gke-cicd/deploy/prod.yaml --region=europe-north1
 
-      gcloud deploy releases create "app-release-${SHORT_SHA}" --delivery-pipeline=gke-cicd-pipeline --region=us-central1 --from-k8s-manifest=./gke-cicd/kubernetes/app.yaml
+      gcloud deploy releases create "app-release-${SHORT_SHA}" --delivery-pipeline=gke-cicd-pipeline --region=europe-north1 --from-k8s-manifest=./gke-cicd/kubernetes/app.yaml
 
 options:
   logging: CLOUD_LOGGING_ONLY
