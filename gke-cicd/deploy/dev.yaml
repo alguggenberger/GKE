@@ -6,5 +6,5 @@ metadata:
   labels: {}
 description: dev
 gke:
-  cluster: projects/cicd-pipeline-515114/locations/europe-north1/clusters/cluster-5
+  cluster: projects/cicd-pipeline-515114/locations/europe-north1-c/clusters/cluster-5
 
